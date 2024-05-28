@@ -124,13 +124,14 @@ const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
-const io = socket(server, {
+const io = new Server(server, {
     cors: {
         origin: "https://game.godcrafts.fun",
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
-    }
+    },
+    transports: ["polling", "websocket"]
 });
 
 const chess = new Chess();
