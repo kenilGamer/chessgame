@@ -1,4 +1,9 @@
-let socket = io("http://127.0.0.1:8080/");
+let socket = io("http://127.0.0.1:8080/",{
+  reconnection: true,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: 50
+});
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
