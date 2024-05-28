@@ -1,11 +1,4 @@
-const socket = io('https://game.godcrafts.fun', {
-  transports: ['polling'],
-  reconnection: true,
-  reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
-  timeout: 20000,
-});
-
+let socket = io();
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
@@ -102,10 +95,15 @@ socket.on("boardState",(data) => {
 
 })
 socket.on("move", (data) => {
-  // const moveText = `${data.from} to ${data.to}`;
   const moveText = chess.move(data);
-  // console.log("ss",data);
-  moveid.textContent = moveText;
+  if (moveText) {
+    const newFen = chess.fen();
+    console.log('New FEN:', newFen);
+    moveid.textContent = `Move: ${data.from}-${data.to}`;
+  } else {
+    // If the move is invalid, display an error message
+    moveResult.textContent = 'Invalid move';
+  }
   renderBoard();
 })
 
