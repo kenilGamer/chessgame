@@ -1,4 +1,4 @@
-let socket = io("https://game.godcrafts.fun");
+let socket = io("wss://game.godcrafts.fun:443");
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;

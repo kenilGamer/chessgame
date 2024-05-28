@@ -4,12 +4,15 @@ const socket = require('socket.io');
 const { Chess } = require('chess.js');
 const path = require('path');
 const app = express();
+
+// Load SSL/TLS certificates
+
 const server = http.createServer(app); // Use 'http' correctly
 const io = socket(server);
 const chess = new Chess();
 let players = {};
 let currentPlayer = "W";
-const port = 8080;
+const port = 443;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
