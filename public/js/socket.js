@@ -1,8 +1,4 @@
-let socket = io("https://game.godcrafts.fun",{
-  transport: ["polling"],
-  upgrade:false,
-  forceNew:true
-});
+let socket = io("https://game.godcrafts.fun");
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
