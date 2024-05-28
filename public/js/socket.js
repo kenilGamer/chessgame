@@ -1,5 +1,5 @@
 let socket = io("https://game.godcrafts.fun/",{
-  transports: ['polling '],
+  transports: ['polling'],
   rejectUnauthorized: true,
   upgrade: false,
 });
