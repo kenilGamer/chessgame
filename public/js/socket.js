@@ -1,5 +1,5 @@
 const socket = io('https://game.godcrafts.fun', {
-  transports: ['websocket'],
+  transports: ['polling'],
   reconnection: true,
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
