@@ -1,6 +1,6 @@
 let socket = io("https://game.godcrafts.fun/",{
   transports: ['polling'],
-  rejectUnauthorized: true,
+  rejectUnauthorized: false,
   upgrade: false,
 });
 const chess = new Chess();
