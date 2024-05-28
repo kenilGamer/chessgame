@@ -1,4 +1,8 @@
-let socket = io("wss://game.godcrafts.fun:443");
+let socket = io("https://game.godcrafts.fun",{
+  transports: ['websocket'],
+  upgrade: false,
+  rejectUnauthorized: false,
+});
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
