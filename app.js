@@ -118,7 +118,7 @@
 // server.listen(port, () => console.log(`Server running at http://127.0.0.1:${port}/`));
 const express = require('express');
 const http = require('http');
-const socket = require('socket.io');
+const { Server } = require('socket.io');
 const { Chess } = require('chess.js');
 const path = require('path');
 
@@ -136,7 +136,7 @@ const io = new Server(server, {
 
 const chess = new Chess();
 let players = {};
-let currentPlayer = "W";
+let currentPlayer = "w";
 const port = 8080;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -154,36 +154,26 @@ io.on('connection', (socket) => {
     } else {
         socket.emit("spectatorRole");
     }
+    
     socket.on('disconnect', () => {
         console.log('user disconnected');
-        if (socket.id) {
-            if (players.white === socket.id) {
-                delete players.white;
-            } else if (players.black === socket.id) {
-                delete players.black;
-            }
-        } else {
-            console.log("spectator disconnected");
+        if (socket.id === players.white) {
+            delete players.white;
+        } else if (socket.id === players.black) {
+            delete players.black;
         }
     });
 
     socket.on('move', (move) => {
-        try {
-            if (chess.turn() === "w" && socket.id !== players.white) return;
-            if (chess.turn() === "b" && socket.id !== players.black) return;
-
-            const result = chess.move(move);
-            if (result) {
-                currentPlayer = chess.turn();
-                io.emit("move", move);
-                io.emit("boardState", chess.fen());
-            } else {
-                console.log("invalid move");
-                socket.emit("invalidMove", move);
-            }
-        } catch (error) {
-            console.log(error);
-            console.log("invalid move", move);
+        if ((chess.turn() === 'w' && socket.id !== players.white) || (chess.turn() === 'b' && socket.id !== players.black)) {
+            return;
+        }
+        const result = chess.move(move);
+        if (result) {
+            currentPlayer = chess.turn();
+            io.emit("move", move);
+            io.emit("boardState", chess.fen());
+        } else {
             socket.emit("invalidMove", move);
         }
     });

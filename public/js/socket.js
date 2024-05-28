@@ -1,8 +1,4 @@
 let socket = io("https://game.godcrafts.fun", {
-  reconnection: true,
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  reconnectionAttempts: 6,
   transports: ["polling", "websocket"]
 });
 const chess = new Chess();
