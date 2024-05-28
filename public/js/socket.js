@@ -1,4 +1,10 @@
-let socket = io("https://game.godcrafts.fun/");
+let socket = io("https://game.godcrafts.fun/",{
+  reconnection: true,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: 6,
+  transports: ["polling"]
+});
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
