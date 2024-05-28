@@ -116,6 +116,14 @@
 // });
 
 // server.listen(port, () => console.log(`Server running at http://127.0.0.1:${port}/`));
+
+
+
+
+
+
+
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -129,9 +137,9 @@ const io = new Server(server, {
         origin: "https://game.godcrafts.fun",
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
-        credentials: true
+        credentials: true,
     },
-    transports: ["polling", "websocket"]
+    transports: ["websocket", "polling"]
 });
 
 const chess = new Chess();

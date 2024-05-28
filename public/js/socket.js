@@ -1,5 +1,5 @@
 let socket = io("https://game.godcrafts.fun", {
-  transports: ["polling", "websocket"]
+  transports: ["polling"]
 });
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
