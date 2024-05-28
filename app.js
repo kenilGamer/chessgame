@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app); // Use 'http' correctly
 const io = socket(server,{
     cors: {
-        origin: "http://localhost:8080",
+        origin: "https://game.godcrafts.fun/",
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
