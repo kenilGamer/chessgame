@@ -1,101 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-       .chessboard {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(8, 1fr);
-            user-select: none;
-        }
-        .square {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            user-select: none;
-        }
-        .light { background-color: #f0d9b5; }
-        .dark { background-color: #b58863; }
-        .light-piece { color: white; } /* Customize color for light pieces */
-        .dark-piece { color: black; } 
-        .flipped{
-            transform: rotate(180deg);
-        }
-        .flipped .square {
-            transform: rotate(180deg);
-        }
-        .controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Adjust as needed */
-    margin-bottom: 20px; /* Adjust as needed */
-    }
-        #reset {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #f0d9b5;
-            border: 1px solid #b58863;
-        }
-        #newGame {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #b5f0ed;
-            border: 1px solid #63b5ae;
-        }
-        #resign {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #f1e185;
-            border: 1px solid #6e6908;
-        }
-        #draw {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #c685f1;
-            border: 1px solid #6e086e;
-        }
-        #undo {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #f1e185;
-            border: 1px solid #6e6908;
-        }
-        #redo {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #f18585;
-            border: 1px solid #6e0808;
-        }
-        #loadGame {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #97f185;
-            border: 1px solid #086e11;
-        }
-        #saveGame {
-            margin-right: 10px;
-            padding: 2px 5px ;
-            background-color: #97f185;
-            border: 1px solid #086e11;
-        }
+      .chessboard {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        user-select: none;
+      }
+      h1,p{
+        padding: 20px;
+        color: #b5f0ed;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 60px; /* Adjust as needed */
+        margin-bottom: 60px; /* Adjust as needed */
 
+      }
+      .square {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        user-select: none;
+      }
+      .light {
+        background-color: #f0d9b5;
+      }
+      .dark {
+        background-color: #b58863;
+      }
+      .light-piece {
+        color: white;
+      } /* Customize color for light pieces */
+      .dark-piece {
+        color: black;
+      }
+      .flipped {
+        transform: rotate(180deg);
+      }
+      .flipped .square {
+        transform: rotate(180deg);
+      }
+      .controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+      #reset {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #f0d9b5;
+        border: 1px solid #b58863;
+      }
+      #newGame {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #b5f0ed;
+        border: 1px solid #63b5ae;
+      }
+      #resign {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #f1e185;
+        border: 1px solid #6e6908;
+      }
+      #draw {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #c685f1;
+        border: 1px solid #6e086e;
+      }
+      #undo {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #f1e185;
+        border: 1px solid #6e6908;
+      }
+      #redo {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #f18585;
+        border: 1px solid #6e0808;
+      }
+      #loadGame {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #97f185;
+        border: 1px solid #086e11;
+      }
+      #saveGame {
+        margin-right: 10px;
+        padding: 2px 5px;
+        background-color: #97f185;
+        border: 1px solid #086e11;
+      }
     </style>
-</head>
-<body>
-    <h1 id="player"></h1>
-    <p id="moviid"></p>
-    <div class="w-full h-[80vh] bg-zinc-900 flex items-center justify-center">
-        <div class="chessboard w-96 h-96 bg-red-400  "></div>
-        
-    </div>
-    <div class="controls">
+  </head>
+  <body>
+    <div class="w-full h-[100vh] bg-zinc-900  ">
+      <h1 id="player"></h1>
+      <p id="moviid"></p>
+      <div class="flex items-center justify-center">
+        <div class="chessboard w-96 h-96 bg-red-400"></div>
+
+      </div>
+      <div class="controls">
         <button id="reset">Reset</button>
         <button id="newGame">New Game</button>
         <button id="resign">Resign</button>
@@ -104,9 +122,20 @@
         <button id="redo">Redo</button>
         <button id="loadGame">Load Game</button>
         <button id="saveGame">Save Game</button>
+      </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js" integrity="sha512-11t8Q+vY9JlCrr+PveZKTYJq8n7O09Y5X/pk/aMd3vJugSvu4xOunGEUzaADqL3I8cZKE/pBwwCfXzDkRJh2sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"
+      integrity="sha512-11t8Q+vY9JlCrr+PveZKTYJq8n7O09Y5X/pk/aMd3vJugSvu4xOunGEUzaADqL3I8cZKE/pBwwCfXzDkRJh2sQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"
+      integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="/js/socket.js"></script>
-</body>
+  </body>
 </html>

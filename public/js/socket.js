@@ -95,8 +95,8 @@ socket.on("boardState",(data) => {
 
 })
 socket.on("move", (data) => {
-  // const moveText = `${data.from} to ${data.to}`;
-  const moveText = chess.move(data);
+  const moveText = `${data.from} to ${data.to}`;
+  // const moveText = chess.move(data);
   console.log("ss",data);
   moveid.textContent = moveText;
   renderBoard();
