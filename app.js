@@ -5,12 +5,13 @@ const { Chess } = require('chess.js');
 const path = require('path');
 const app = express();
 const server = http.createServer(app); // Use 'http' correctly
-const io = socket(server);
+const io = socket(server,{cors:{origin:"*"}});
 const chess = new Chess();
 let players = {};
 let currentPlayer = "W";
 const port = 8080;
 
+io.set("transports",["polling"])
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
