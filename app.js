@@ -8,11 +8,18 @@ const app = express();
 // Load SSL/TLS certificates
 
 const server = http.createServer(app); // Use 'http' correctly
-const io = socket(server);
+const io = socket(server,{
+    cors: {
+        origin: "http://localhost:8080",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
+    }
+});
 const chess = new Chess();
 let players = {};
 let currentPlayer = "W";
-const port = 443;
+const port = 8080;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -29,7 +36,6 @@ io.on('connection', (socket) => {
     } else {
         socket.emit("spectatorRole");
     }
-
     socket.on('disconnect', () => {
         console.log('user disconnected');
         if (socket.id) {
