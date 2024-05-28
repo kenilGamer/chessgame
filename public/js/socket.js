@@ -1,4 +1,7 @@
 let socket = io("http://127.0.0.1:8080/",{
+  transports: ['polling'],
+  upgrade: false,
+  rejectUnauthorized: false,
   reconnection: true,
   reconnectionDelay: 1000,
   reconnectionDelayMax: 5000,
