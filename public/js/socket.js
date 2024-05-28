@@ -1,4 +1,13 @@
-let socket = io();
+const socket = io('https://game.godcrafts.fun', {
+  transports: ['polling'],
+  reconnection: true,
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
+  timeout: 20000,
+  query: {
+    EIO: '4'
+  }
+});
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard")
 let draggdPiece = null;
@@ -95,9 +104,9 @@ socket.on("boardState",(data) => {
 
 })
 socket.on("move", (data) => {
-  const moveText = `${data.from} to ${data.to}`;
-  // const moveText = chess.move(data);
-  console.log("ss",data);
+  // const moveText = `${data.from} to ${data.to}`;
+  const moveText = chess.move(data);
+  // console.log("ss",data);
   moveid.textContent = moveText;
   renderBoard();
 })
